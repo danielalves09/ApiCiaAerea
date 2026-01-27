@@ -31,4 +31,16 @@ public class PilotoController : ControllerBase
         return Ok(pilotos);
     }
 
+    [HttpGet("{id}")]
+    public IActionResult ListarPilotoPorId(int id)
+    {
+        var piloto = _pilotoService.ListarPilotoPorId(id);
+        if (piloto != null)
+        {
+            return Ok(piloto);
+
+        }
+        return NotFound();
+    }
+
 }

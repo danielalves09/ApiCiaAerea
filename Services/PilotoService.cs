@@ -36,4 +36,18 @@ public class PilotoService
         return _context.Pilotos
             .Select(p => new ListarPilotoViewModel(p.Id, p.Nome));
     }
+
+    public DetalhesPilotoViewModel? ListarPilotoPorId(int id)
+    {
+        var piloto = _context.Pilotos.Find(id);
+
+        if (piloto != null)
+        {
+            return new DetalhesPilotoViewModel(piloto.Id, piloto.Nome, piloto.Matricula);
+
+        }
+        return null;
+
+
+    }
 }
