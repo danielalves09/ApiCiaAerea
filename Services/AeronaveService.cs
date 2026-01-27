@@ -10,10 +10,12 @@ namespace CiaAerea.Services
     {
         private readonly CiaAereaContext _context;
         private readonly AdicionarAeronaveValidator _adicionarAeronaveValidator;
-        public AeronaveService(CiaAereaContext context, AdicionarAeronaveValidator adicionarAeronaveValidator)
+        private readonly AtualizarAeronaveValidator _atualizarAeronaveValidator;
+        public AeronaveService(CiaAereaContext context, AdicionarAeronaveValidator adicionarAeronaveValidator, AtualizarAeronaveValidator atualizarAeronaveValidator)
         {
             _context = context;
             _adicionarAeronaveValidator = adicionarAeronaveValidator;
+            _atualizarAeronaveValidator = atualizarAeronaveValidator;
         }
 
         public DetalhesAeronaveViewModel AdicionarAeronave(AdicionarAeronaveViewModel model)
@@ -47,6 +49,7 @@ namespace CiaAerea.Services
 
         public DetalhesAeronaveViewModel? AtualizarAeronave(AtualizarAeronaveViewModel model)
         {
+            _atualizarAeronaveValidator.ValidateAndThrow(model);
             var aeronave = _context.Aeronaves.Find(model.Id);
             if (aeronave != null)
             {
