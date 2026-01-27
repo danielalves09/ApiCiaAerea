@@ -1,6 +1,6 @@
 ﻿namespace CiaAerea.Entities.Enums
 {
-    public enum TipoMannutencao
+    public enum TipoManutencao
     {
         Preventiva,
         Corretiva

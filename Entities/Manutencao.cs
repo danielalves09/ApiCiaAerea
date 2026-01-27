@@ -1,4 +1,6 @@
-﻿namespace CiaAerea.Entities
+﻿using CiaAerea.Entities.Enums;
+
+namespace CiaAerea.Entities
 {
     public class Manutencao
     {
