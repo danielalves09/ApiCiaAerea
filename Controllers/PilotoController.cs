@@ -24,4 +24,11 @@ public class PilotoController : ControllerBase
         //return CreatedAtAction(nameof(AdicionarPiloto), new { id = piloto.Id }, piloto);
     }
 
+    [HttpGet]
+    public IActionResult ListarPilotos()
+    {
+        var pilotos = _pilotoService.ListarPilotos();
+        return Ok(pilotos);
+    }
+
 }

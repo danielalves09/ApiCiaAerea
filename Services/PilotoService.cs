@@ -30,4 +30,10 @@ public class PilotoService
         return new DetalhesPilotoViewModel(piloto.Id, piloto.Nome, piloto.Matricula);
 
     }
+
+    public IEnumerable<ListarPilotoViewModel> ListarPilotos()
+    {
+        return _context.Pilotos
+            .Select(p => new ListarPilotoViewModel(p.Id, p.Nome));
+    }
 }
