@@ -18,7 +18,7 @@ namespace CiaAerea.Controllers
         public IActionResult AdicionarAeronave([FromBody] AdicionarAeronaveViewModel model)
         {
             var aeronave = _aeronaveService.AdicionarAeronave(model);
-            return Ok(aeronave);
+            return CreatedAtAction(nameof(ListarAeronavePorId), new { id = aeronave.Id }, aeronave);
         }
 
         [HttpGet]
