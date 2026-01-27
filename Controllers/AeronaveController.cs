@@ -20,5 +20,12 @@ namespace CiaAerea.Controllers
             var aeronave = _aeronaveService.AdicionarAeronave(model);
             return Ok(aeronave);
         }
+
+        [HttpGet]
+        public IActionResult ListarAeronaves()
+        {
+            var aeronaves = _aeronaveService.ListarAeronaves();
+            return Ok(aeronaves);
+        }
     }
 }
