@@ -38,5 +38,16 @@ namespace CiaAerea.Controllers
             }
             return Ok(aeronave);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult AtualizarAeronave(int id, [FromBody] AtualizarAeronaveViewModel model)
+        {
+            if (id != model.Id)
+            {
+                return BadRequest("O ID informado da URL é diferente do ID do corpo da requisição.");
+            }
+            var aeronaveAtualizada = _aeronaveService.AtualizarAeronave(model);
+            return Ok(aeronaveAtualizada);
+        }
     }
 }

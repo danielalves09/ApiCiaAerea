@@ -39,5 +39,23 @@ namespace CiaAerea.Services
 
             return new DetalhesAeronaveViewModel(aeronave.Id, aeronave.Fabricante, aeronave.Modelo, aeronave.Codigo);
         }
+
+        public DetalhesAeronaveViewModel? AtualizarAeronave(AtualizarAeronaveViewModel model)
+        {
+            var aeronave = _context.Aeronaves.Find(model.Id);
+            if (aeronave != null)
+            {
+                aeronave.Fabricante = model.Fabricante;
+                aeronave.Modelo = model.Modelo;
+                aeronave.Codigo = model.Codigo;
+
+                _context.Aeronaves.Update(aeronave);
+                _context.SaveChanges();
+
+                return new DetalhesAeronaveViewModel(aeronave.Id, aeronave.Fabricante, aeronave.Modelo, aeronave.Codigo);
+            }
+            return null;
+
+        }
     }
 }
