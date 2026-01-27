@@ -57,5 +57,16 @@ namespace CiaAerea.Services
             return null;
 
         }
+
+        public void ExcluirAeronave(int id)
+        {
+            var aeronave = _context.Aeronaves.Find(id);
+            if (aeronave != null)
+            {
+                _context.Aeronaves.Remove(aeronave);
+                _context.SaveChanges();
+            }
+
+        }
     }
 }

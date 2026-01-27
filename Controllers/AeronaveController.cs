@@ -49,5 +49,12 @@ namespace CiaAerea.Controllers
             var aeronaveAtualizada = _aeronaveService.AtualizarAeronave(model);
             return Ok(aeronaveAtualizada);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult ExcluirAeronave(int id)
+        {
+            _aeronaveService.ExcluirAeronave(id);
+            return NoContent();
+        }
     }
 }
