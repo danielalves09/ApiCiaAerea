@@ -28,5 +28,16 @@ namespace CiaAerea.Services
             return _context.Aeronaves.Select(a => new ListarAeronaveViewModel(a.Id, a.Modelo, a.Codigo));
 
         }
+
+        public DetalhesAeronaveViewModel ListarAeronavePorId(int id)
+        {
+            var aeronave = _context.Aeronaves.Find(id);
+            if (aeronave == null)
+            {
+                return null;
+            }
+
+            return new DetalhesAeronaveViewModel(aeronave.Id, aeronave.Fabricante, aeronave.Modelo, aeronave.Codigo);
+        }
     }
 }

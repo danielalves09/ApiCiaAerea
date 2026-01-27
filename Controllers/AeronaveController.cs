@@ -27,5 +27,16 @@ namespace CiaAerea.Controllers
             var aeronaves = _aeronaveService.ListarAeronaves();
             return Ok(aeronaves);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult ListarAeronavePorId(int id)
+        {
+            var aeronave = _aeronaveService.ListarAeronavePorId(id);
+            if (aeronave == null)
+            {
+                return NotFound();
+            }
+            return Ok(aeronave);
+        }
     }
 }
