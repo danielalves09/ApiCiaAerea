@@ -1,4 +1,5 @@
 using CiaAerea.Contexts;
+using CiaAerea.Middlewares;
 using CiaAerea.Services;
 using CiaAerea.Validators.Aeronave;
 
@@ -32,5 +33,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ValidationExceptionHandlerMiddleware>();
 
 app.Run();
