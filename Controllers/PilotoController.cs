@@ -43,4 +43,17 @@ public class PilotoController : ControllerBase
         return NotFound();
     }
 
+    [HttpPut("{id}")]
+    public IActionResult AtualizarPiloto(int id, AtualizarPilotoViewModel model)
+    {
+
+        if (id != model.Id)
+        {
+            return BadRequest("O ID informado na URL é diferente do ID informado no corpo da requisição.");
+        }
+        var piloto = _pilotoService.AtualizarPiloto(model);
+        return Ok(piloto);
+
+
+    }
 }

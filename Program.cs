@@ -20,6 +20,7 @@ builder.Services.AddTransient<AdicionarAeronaveValidator>();
 builder.Services.AddTransient<AtualizarAeronaveValidator>();
 builder.Services.AddTransient<ExcluirAeronaveValidator>();
 builder.Services.AddTransient<AdicionarPilotoValidator>();
+builder.Services.AddTransient<AtualizarPilotoValidator>();
 
 
 var app = builder.Build();

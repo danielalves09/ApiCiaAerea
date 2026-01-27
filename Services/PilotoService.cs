@@ -12,10 +12,13 @@ public class PilotoService
     private readonly CiaAereaContext _context;
     private readonly AdicionarPilotoValidator _adicionarPilotoValidator;
 
-    public PilotoService(CiaAereaContext context, AdicionarPilotoValidator adicionarPilotoValidator)
+    private readonly AtualizarPilotoValidator _atualizarPilotoValidator;
+
+    public PilotoService(CiaAereaContext context, AdicionarPilotoValidator adicionarPilotoValidator, AtualizarPilotoValidator atualizarPilotoValidator)
     {
         _context = context;
         _adicionarPilotoValidator = adicionarPilotoValidator;
+        _atualizarPilotoValidator = atualizarPilotoValidator;
     }
 
     public DetalhesPilotoViewModel AdicionarPiloto(AdicionarPilotoViewModel model)
@@ -49,5 +52,25 @@ public class PilotoService
         return null;
 
 
+    }
+
+    public DetalhesPilotoViewModel? AtualizarPiloto(AtualizarPilotoViewModel model)
+    {
+        _atualizarPilotoValidator.ValidateAndThrow(model);
+
+        var piloto = _context.Pilotos.Find(model.Id);
+
+        if (piloto != null)
+        {
+            piloto.Nome = model.Nome;
+            piloto.Matricula = model.Matricula;
+
+            _context.Pilotos.Update(piloto);
+            _context.SaveChanges();
+
+            return new DetalhesPilotoViewModel(piloto.Id, piloto.Nome, piloto.Matricula);
+        }
+
+        return null;
     }
 }
