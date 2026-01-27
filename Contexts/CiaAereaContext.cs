@@ -1,4 +1,5 @@
 ﻿using CiaAerea.Entities;
+using CiaAerea.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace CiaAerea.Contexts
@@ -25,6 +26,16 @@ namespace CiaAerea.Contexts
             var connectionString = _configuration.GetConnectionString("CiaAerea");
             optionsBuilder.UseSqlServer(connectionString);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new AeronaveConfiguration());
+            modelBuilder.ApplyConfiguration(new PilotoConfiguration());
+            modelBuilder.ApplyConfiguration(new VooConfiguration());
+            modelBuilder.ApplyConfiguration(new CancelamentoConfiguration());
+            modelBuilder.ApplyConfiguration(new ManutencaoConfiguration());
+        }
+
 
     }
 }
