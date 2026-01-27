@@ -11,11 +11,9 @@ namespace CiaAerea.Validators.Aeronave
 
         public AdicionarAeronaveValidator(CiaAereaContext context)
         {
-            _context = context;
-        }
 
-        public AdicionarAeronaveValidator()
-        {
+            _context = context;
+
             RuleFor(a => a.Fabricante)
                 .NotEmpty().WithMessage("É necessário informar o fabricante da Aeronave")
                 .MaximumLength(50).WithMessage("O fabricante deve ter no máximo 50 caracteres.");

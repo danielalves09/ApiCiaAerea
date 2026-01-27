@@ -1,20 +1,25 @@
 ﻿using CiaAerea.Contexts;
 using CiaAerea.Entities;
+using CiaAerea.Validators.Aeronave;
 using CiaAerea.ViewModels.Aeronave;
+using FluentValidation;
 
 namespace CiaAerea.Services
 {
     public class AeronaveService
     {
         private readonly CiaAereaContext _context;
-
-        public AeronaveService(CiaAereaContext context)
+        private readonly AdicionarAeronaveValidator _adicionarAeronaveValidator;
+        public AeronaveService(CiaAereaContext context, AdicionarAeronaveValidator adicionarAeronaveValidator)
         {
             _context = context;
+            _adicionarAeronaveValidator = adicionarAeronaveValidator;
         }
 
         public DetalhesAeronaveViewModel AdicionarAeronave(AdicionarAeronaveViewModel model)
         {
+
+            _adicionarAeronaveValidator.ValidateAndThrow(model);
             var aeronave = new Aeronave(model.Fabricante, model.Modelo, model.Codigo);
 
             _context.Aeronaves.Add(aeronave);

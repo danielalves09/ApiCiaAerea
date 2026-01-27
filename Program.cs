@@ -1,5 +1,6 @@
 using CiaAerea.Contexts;
 using CiaAerea.Services;
+using CiaAerea.Validators.Aeronave;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<CiaAereaContext>();
 builder.Services.AddTransient<AeronaveService>();
+builder.Services.AddTransient<AdicionarAeronaveValidator>();
 
 var app = builder.Build();
 
