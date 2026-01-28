@@ -22,4 +22,11 @@ public class VooController : ControllerBase
         return Ok(voo);
         //return CreatedAtAction(nameof(AdicionarVoo), new { id = voo.Id }, voo);
     }
+
+    [HttpGet]
+    public IActionResult ListarVoos()
+    {
+        var voos = _vooService.ListarVoos();
+        return Ok(voos);
+    }
 }

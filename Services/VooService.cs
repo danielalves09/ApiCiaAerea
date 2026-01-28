@@ -49,4 +49,17 @@ public class VooService
             );
     }
 
+    public IEnumerable<ListarVooViewModel> ListarVoos()
+    {
+        return _context.Voos.Select(voo => new ListarVooViewModel(
+            voo.Id,
+            voo.Origem,
+            voo.Destino,
+            voo.DataHoraPartida,
+            voo.DataHoraChegada
+        ));
+
+
+    }
+
 }
