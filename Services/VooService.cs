@@ -1,7 +1,9 @@
 using CiaAerea.Contexts;
 using CiaAerea.Entities;
+using CiaAerea.Validators.Cancelamento;
 using CiaAerea.Validators.Voo;
 using CiaAerea.ViewModels.Aeronave;
+using CiaAerea.ViewModels.Cancelamento;
 using CiaAerea.ViewModels.Piloto;
 using CiaAerea.ViewModels.Voos;
 using FluentValidation;
@@ -16,12 +18,15 @@ public class VooService
     private readonly AtualizarVooValidator _atualizarVooValidator;
     private readonly ExcluirVooValidator _excluirVooValidator;
 
-    public VooService(CiaAereaContext context, AdicionarVooValidator adicionarVooValidator, AtualizarVooValidator atualizarVooValidator, ExcluirVooValidator excluirVooValidator)
+    private readonly CancelarVooValidator _cancelarVooValidator;
+
+    public VooService(CiaAereaContext context, AdicionarVooValidator adicionarVooValidator, AtualizarVooValidator atualizarVooValidator, ExcluirVooValidator excluirVooValidator, CancelarVooValidator cancelarVooValidator)
     {
         _context = context;
         _adicionarVooValidator = adicionarVooValidator;
         _atualizarVooValidator = atualizarVooValidator;
         _excluirVooValidator = excluirVooValidator;
+        _cancelarVooValidator = cancelarVooValidator;
     }
 
     public DetalhesVooViewModel AdicionarVoo(AdicionarVooViewModel model)
@@ -147,6 +152,20 @@ public class VooService
             _context.SaveChanges();
         }
     }
+
+    public DetalhesVooViewModel? CancelarVoo(CancelarVooViewModel model)
+    {
+        _cancelarVooValidator.ValidateAndThrow(model);
+
+        var cancelamento = new Cancelamento(model.Motivo, model.DataHoraNotificacao, model.VooId);
+
+        _context.Add(cancelamento);
+        _context.SaveChanges();
+
+        return ListarVooPeloId(model.VooId);
+    }
+
+
 
 
 }
