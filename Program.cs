@@ -3,6 +3,7 @@ using CiaAerea.Middlewares;
 using CiaAerea.Services;
 using CiaAerea.Validators.Aeronave;
 using CiaAerea.Validators.Cancelamento;
+using CiaAerea.Validators.Manutencao;
 using CiaAerea.Validators.Piloto;
 using CiaAerea.Validators.Voo;
 using DinkToPdf;
@@ -31,6 +32,9 @@ builder.Services.AddTransient<AdicionarVooValidator>();
 builder.Services.AddTransient<AtualizarVooValidator>();
 builder.Services.AddTransient<ExcluirVooValidator>();
 builder.Services.AddTransient<CancelarVooValidator>();
+builder.Services.AddTransient<AdicionarManutencaoValidator>();
+builder.Services.AddTransient<AtualizarManutencaoValidator>();
+builder.Services.AddTransient<ExcluirManutencaoValidator>();
 
 builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
 
