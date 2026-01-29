@@ -19,8 +19,8 @@ public class VooController : ControllerBase
     public IActionResult AdicionarVoo(AdicionarVooViewModel model)
     {
         var voo = _vooService.AdicionarVoo(model);
-        return Ok(voo);
-        //return CreatedAtAction(nameof(AdicionarVoo), new { id = voo.Id }, voo);
+
+        return CreatedAtAction(nameof(ListarVooPeloId), new { id = voo.Id }, voo);
     }
 
     [HttpGet]

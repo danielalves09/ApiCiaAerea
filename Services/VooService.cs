@@ -24,8 +24,7 @@ public class VooService
     {
         _adicionarVooValidator.ValidateAndThrow(model);
 
-        // Lógica para adicionar o voo ao banco de dados
-        // Exemplo simplificado:
+
         var voo = new Voo
         (
             model.Origem,
@@ -40,16 +39,7 @@ public class VooService
         _context.Voos.Add(voo);
         _context.SaveChanges();
 
-        return new DetalhesVooViewModel
-        (
-            voo.Id,
-            voo.Origem,
-            voo.Destino,
-            voo.DataHoraPartida,
-            voo.DataHoraChegada,
-            voo.AeronaveId,
-            voo.PilotoId
-            );
+        return ListarVooPeloId(voo.Id)!;
     }
 
     public IEnumerable<ListarVooViewModel> ListarVoos(string? origem, string? destino, DateTime? partida, DateTime? chegada)
