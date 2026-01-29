@@ -1,5 +1,6 @@
 using CiaAerea.ViewModels.Aeronave;
 using CiaAerea.ViewModels.Piloto;
+using CiaAerea.ViewModels.Cancelamento;
 
 namespace CiaAerea.ViewModels.Voos;
 
@@ -26,6 +27,7 @@ public class DetalhesVooViewModel
 
     public DetalhesAeronaveViewModel? Aeronave { get; set; }
     public DetalhesPilotoViewModel? Piloto { get; set; }
+    public DetalhesCancelamentoVooViewModel? Cancelamento { get; set; }
 
 
 }

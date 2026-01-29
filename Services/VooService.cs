@@ -79,6 +79,7 @@ public class VooService
     {
         var voo = _context.Voos.Include(v => v.Aeronave)
                                 .Include(v => v.Piloto)
+                                .Include(v => v.Cancelamento)
                                 .FirstOrDefault(v => v.Id == id);
         if (voo != null)
         {
@@ -106,6 +107,18 @@ public class VooService
                 voo.Piloto.Nome,
                 voo.Piloto.Matricula
             );
+
+            if (voo.Cancelamento != null)
+            {
+                resultado.Cancelamento = new DetalhesCancelamentoVooViewModel
+                (
+                    voo.Cancelamento.Id,
+                    voo.Cancelamento.Motivo,
+                    voo.Cancelamento.DataHoraNotificacao,
+                    voo.Cancelamento.VooId
+                );
+            }
+
             return resultado;
         }
 
