@@ -13,11 +13,13 @@ public class VooService
 {
     private readonly CiaAereaContext _context;
     private readonly AdicionarVooValidator _adicionarVooValidator;
+    private readonly AtualizarVooValidator _atualizarVooValidator;
 
-    public VooService(CiaAereaContext context, AdicionarVooValidator adicionarVooValidator)
+    public VooService(CiaAereaContext context, AdicionarVooValidator adicionarVooValidator, AtualizarVooValidator atualizarVooValidator)
     {
         _context = context;
         _adicionarVooValidator = adicionarVooValidator;
+        _atualizarVooValidator = atualizarVooValidator;
     }
 
     public DetalhesVooViewModel AdicionarVoo(AdicionarVooViewModel model)
@@ -103,6 +105,32 @@ public class VooService
 
         return null;
 
+
+    }
+
+    public DetalhesVooViewModel? AtualizarVoo(AtualizarVooViewModel model)
+    {
+
+        _atualizarVooValidator.ValidateAndThrow(model);
+
+        var voo = _context.Voos.FirstOrDefault(v => v.Id == model.Id);
+        if (voo == null)
+        {
+            voo.Origem = model.Origem;
+            voo.Destino = model.Destino;
+            voo.DataHoraPartida = model.DataHoraPartida;
+            voo.DataHoraChegada = model.DataHoraChegada;
+            voo.AeronaveId = model.AeronaveId;
+            voo.PilotoId = model.PilotoId;
+
+            _context.Voos.Update(voo);
+            _context.SaveChanges();
+
+            return ListarVooPeloId(voo.Id);
+        }
+
+
+        return null;
 
     }
 }

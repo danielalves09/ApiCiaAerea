@@ -40,4 +40,20 @@ public class VooController : ControllerBase
         }
         return Ok(voo);
     }
+
+    [HttpPut("{id}")]
+    public IActionResult AtualizarVoo(int id, AtualizarVooViewModel model)
+    {
+        if (id != model.Id)
+        {
+            return BadRequest("O ID do voo na URL não corresponde ao ID no corpo da requisição.");
+        }
+
+        var vooAtualizado = _vooService.AtualizarVoo(model);
+        if (vooAtualizado == null)
+        {
+            return NotFound();
+        }
+        return Ok(vooAtualizado);
+    }
 }

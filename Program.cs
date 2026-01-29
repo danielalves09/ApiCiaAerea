@@ -25,6 +25,7 @@ builder.Services.AddTransient<AdicionarPilotoValidator>();
 builder.Services.AddTransient<AtualizarPilotoValidator>();
 builder.Services.AddTransient<ExcluirPilotoValidator>();
 builder.Services.AddTransient<AdicionarVooValidator>();
+builder.Services.AddTransient<AtualizarVooValidator>();
 
 
 var app = builder.Build();
