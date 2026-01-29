@@ -71,4 +71,16 @@ public class VooController : ControllerBase
         var vooCancelado = _vooService.CancelarVoo(model);
         return Ok(vooCancelado);
     }
+
+    [HttpGet("{id}/ficha")]
+    public IActionResult GerarFichaVoo(int id)
+    {
+        var fichaPdf = _vooService.GerarFichaDoVoo(id);
+        if (fichaPdf == null)
+        {
+            return NotFound();
+        }
+
+        return File(fichaPdf, "application/pdf", $"FichaVoo_{id}.pdf");
+    }
 }
