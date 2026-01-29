@@ -56,4 +56,11 @@ public class VooController : ControllerBase
         }
         return Ok(vooAtualizado);
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult ExcluirVoo(int id)
+    {
+        _vooService.ExcluirVoo(id);
+        return NoContent();
+    }
 }

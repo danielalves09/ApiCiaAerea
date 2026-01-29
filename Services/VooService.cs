@@ -138,11 +138,11 @@ public class VooService
 
     public void ExcluirVoo(int id)
     {
-        var voo = _context.Voos.FirstOrDefault(v => v.Id == id);
+
+        _excluirVooValidator.ValidateAndThrow(id);
+        var voo = _context.Voos.Find(id);
         if (voo != null)
         {
-            _excluirVooValidator.ValidateAndThrow(new ExcluirVooViewModel { Id = id });
-
             _context.Voos.Remove(voo);
             _context.SaveChanges();
         }
