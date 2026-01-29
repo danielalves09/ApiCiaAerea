@@ -24,9 +24,9 @@ public class VooController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult ListarVoos()
+    public IActionResult ListarVoos(string? origem, string? destino, DateTime? partida, DateTime? chegada)
     {
-        var voos = _vooService.ListarVoos();
+        var voos = _vooService.ListarVoos(origem, destino, partida, chegada);
         return Ok(voos);
     }
 }
