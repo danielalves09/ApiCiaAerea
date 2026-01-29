@@ -14,12 +14,14 @@ public class VooService
     private readonly CiaAereaContext _context;
     private readonly AdicionarVooValidator _adicionarVooValidator;
     private readonly AtualizarVooValidator _atualizarVooValidator;
+    private readonly ExcluirVooValidator _excluirVooValidator;
 
-    public VooService(CiaAereaContext context, AdicionarVooValidator adicionarVooValidator, AtualizarVooValidator atualizarVooValidator)
+    public VooService(CiaAereaContext context, AdicionarVooValidator adicionarVooValidator, AtualizarVooValidator atualizarVooValidator, ExcluirVooValidator excluirVooValidator)
     {
         _context = context;
         _adicionarVooValidator = adicionarVooValidator;
         _atualizarVooValidator = atualizarVooValidator;
+        _excluirVooValidator = excluirVooValidator;
     }
 
     public DetalhesVooViewModel AdicionarVoo(AdicionarVooViewModel model)
@@ -132,5 +134,17 @@ public class VooService
 
         return null;
 
+    }
+
+    public void ExcluirVoo(int id)
+    {
+        var voo = _context.Voos.FirstOrDefault(v => v.Id == id);
+        if (voo != null)
+        {
+            _excluirVooValidator.ValidateAndThrow(new ExcluirVooViewModel { Id = id });
+
+            _context.Voos.Remove(voo);
+            _context.SaveChanges();
+        }
     }
 }
