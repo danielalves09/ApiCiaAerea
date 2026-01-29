@@ -116,7 +116,7 @@ public class VooService
         _atualizarVooValidator.ValidateAndThrow(model);
 
         var voo = _context.Voos.FirstOrDefault(v => v.Id == model.Id);
-        if (voo == null)
+        if (voo != null)
         {
             voo.Origem = model.Origem;
             voo.Destino = model.Destino;
@@ -147,4 +147,6 @@ public class VooService
             _context.SaveChanges();
         }
     }
+
+
 }
