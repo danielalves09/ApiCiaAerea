@@ -29,4 +29,15 @@ public class VooController : ControllerBase
         var voos = _vooService.ListarVoos(origem, destino, partida, chegada);
         return Ok(voos);
     }
+
+    [HttpGet("{id}")]
+    public IActionResult ListarVooPeloId(int id)
+    {
+        var voo = _vooService.ListarVooPeloId(id);
+        if (voo == null)
+        {
+            return NotFound();
+        }
+        return Ok(voo);
+    }
 }

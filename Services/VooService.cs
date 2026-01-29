@@ -1,8 +1,11 @@
 using CiaAerea.Contexts;
 using CiaAerea.Entities;
 using CiaAerea.Validators.Voo;
+using CiaAerea.ViewModels.Aeronave;
+using CiaAerea.ViewModels.Piloto;
 using CiaAerea.ViewModels.Voos;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 
 namespace CiaAerea.Services;
 
@@ -73,4 +76,43 @@ public class VooService
 
     }
 
+    public DetalhesVooViewModel? ListarVooPeloId(int id)
+    {
+        var voo = _context.Voos.Include(v => v.Aeronave)
+                                .Include(v => v.Piloto)
+                                .FirstOrDefault(v => v.Id == id);
+        if (voo != null)
+        {
+            var resultado = new DetalhesVooViewModel(
+           voo.Id,
+           voo.Origem,
+           voo.Destino,
+           voo.DataHoraPartida,
+           voo.DataHoraChegada,
+           voo.AeronaveId,
+           voo.PilotoId
+       );
+
+            resultado.Aeronave = new DetalhesAeronaveViewModel
+            (
+                voo.Aeronave.Id,
+                voo.Aeronave.Fabricante,
+                voo.Aeronave.Modelo,
+                voo.Aeronave.Codigo
+            );
+
+            resultado.Piloto = new DetalhesPilotoViewModel
+            (
+                voo.Piloto.Id,
+                voo.Piloto.Nome,
+                voo.Piloto.Matricula
+            );
+            return resultado;
+        }
+
+
+        return null;
+
+
+    }
 }

@@ -27,4 +27,5 @@ public class DetalhesVooViewModel
     public DetalhesAeronaveViewModel? Aeronave { get; set; }
     public DetalhesPilotoViewModel? Piloto { get; set; }
 
+
 }
